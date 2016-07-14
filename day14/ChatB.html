@@ -6,11 +6,27 @@
 <link rel="stylesheet" type="text/css" href="/css/chat.css" />
 
 <script>
+var b_area;
+var b_txt;
+
+function init(){
+	b_area=document.getElementById("b_area");
+	b_txt=document.getElementById("b_txt");
+}
+function enter(){
+	var key=event.keyCode;
+	//ChatB의 textarea에 글씨를 넣어야함.
+	if(key==13){
+	//opener.chatB.area.value+="ㅋㅋㅋㅋ\n";
+	opener.chatA.area.value+=chatB.b_txt.value+"\n";
+	opener.chatB.b_txt.value="";
+	}
+}
 </script>
 </head>
-<body>
+<body onLoad="init()">
 <div id="wrapper">
-	<textarea>점심 먹었니?</textarea>
-	<input type="text">
+	<textarea id="b_area"></textarea>
+	<input type="text" id="b_txt">
 </body>
 </html>

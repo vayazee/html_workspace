@@ -4,12 +4,15 @@
 	<meta charset="UTF-8">
 	<title>채팅효과내기</title>
 <script>
+var chatA;		//새롭게 태어난 팝업창들이 접글할 수 있도록 선언....
+var chatB;
+
 function openCilent(){
 	var spec1="width=320px, height=430px,left=100px, top=200px"
-	window.open("chatA.html","pop1",spec1);
+	chatA=window.open("chatA.html","pop1",spec1);
 	//채팅을 할 두 클라이언트 창 띄우기!!
 	var spec2="width=320px, height=430px,left=500px, top=200px"
-	window.open("chatB.html","pop2",spec2);
+	chatB=window.open("chatB.html","pop2",spec2);
 }
 </script>
 </head>
