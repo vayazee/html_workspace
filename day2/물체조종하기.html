@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<style>
+/*이 영역은 html이 아닌,Cascading Style Sheet 라는 CSS라 불리는 디자인 영역이다!!
+	이 기술을 이용하면, html의 문서로서의 한계를 극복할 수 있다.
+	예)제한 없는 글씨 크기, 제한없는 컨텐츠의 위치, 색상.. 등등.. 디자인과 관련된 거의 모든 것!!
+*/
+#aoa{
+	position:absolute; /*절대 위치로 지정*/
+	left:200px; /*x축*/
+	top:200px; /*y축*/
+	transform:rotate(20deg);
+	transform:scale(1,1);
+}
+#u{
+	position:absolute;
+	left:630px;
+}
+#d{
+	position:absolute;
+	left:705px;
+}
+</style>
+<script>
+//버튼을 누르면 물체를 우측으로(left증가) 움직이자!
+	var x=200;
+	var y=200;
+	var d=0;		//각도정보를 담을 변수!!
+	var s=1;
+function moveleft(){
+	x=x-10;
+	document.getElementById("aoa").style.left=x+"px"
+}
+function moveright(){
+	//문서내에 aoa라 불리는 이미지의 스타일 속성중 left 값 변경!
+	x=x+10;
+	document.getElementById("aoa").style.left=x+"px"	//500이변할 가능성을 주기 위해 밖으로뺌
+}
+function moveup(){
+	y=y-10
+	document.getElementById("aoa").style.top=y+"px"
+}
+function movedown(){
+	y=y+10
+	document.getElementById("aoa").style.top=y+"px"
+}
+//스타일시트를 제어하여, 물체를 돌려보자!!
+function spin(){
+	d=d+10;
+	document.getElementById("aoa").style.transform="rotate("+d+"deg)";
+}
+//스타일시트를 제어하여, 물체의 크기를 변경해보자!!
+function setScale(){
+	s=s+0.1;
+	document.getElementById("aoa").style.transform="scale("+s+","+s+")";
+
+}
+</script>
+</head>
+<body>
+	<input type="button" value="좌측이동" onmouseover="moveleft()">
+	<input type="button" value="우측이동" onmouseover="moveright()">
+	<input type="button" value="위로이동" onmouseover="moveup()" id="u">
+	<input type="button" value="아래로이동" onmouseover="movedown()" id="d">
+	<input type="button" value="풍차돌리기" onClick="spin()">
+	<input type="button" value="스케일링" onClick="setScale()">
+	<img src="../images/aoa.jpg" width="350px" id="aoa">
+</body>
+</html>

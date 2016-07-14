@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>충돌감지 테스트</title>
+<style>
+
+#box1{
+	background:orange;
+}
+
+#box2{
+	background:#bdbdbd;
+}
+
+</style>
+<script src="../lib/lib.js"></script>
+<script>
+
+
+window.addEventListener("load",function(){
+	var box1=document.getElementById("box1");
+	var box2=document.getElementById("box2");
+
+	box1.addEventListener("mousemove",function(){
+		box1.style.left=event.clientX-50+"px";
+		box1.style.top=event.clientY-50+"px";
+
+		//충돌감지하기!
+		var result=hitTest(box1,box2);
+		if(result){
+			box2.innerText="충돌했어요";
+		}else{
+			box2.innerText="";
+		}
+	})
+})
+
+</script>
+
+</head>
+<body>
+	<div id="box1" style="position:absolute; left:100px;top:100px; width:100px;height:100px;">A</div>
+	<div id="box2"style="position:absolute; left:500px;top:300px;width:100px;
+	height:100px;">B</div>
+</body>
+</html>

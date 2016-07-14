@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>이미지 들고다니기</title>
+<script>
+//문서가 실행되면 아래의 텍스트박스에 내 이름 넣기
+function init(){
+document.getElementById("txt").value="딸기";
+}
+</script>
+</head>
+<body onload="init()">
+
+<!--<img src="../images/2.jpg" 
+onDblClick="alert('더블클릭했어?');"
+onMouseOut="alert('벗어났어?');" onMouseOver="alert('올렸어?');">
+<input type="text" onFocus="alert('커서올렸어?');" onblur="alert('커서벗어났어!?');">
+-->
+<input type="text" id="txt" onChange="alert('변경했어?')">
+<select onChange="alert('바꿨어?')">
+	<option>네이버</option>
+	<option>구글</option>
+	<option>다음</option>
+
+</select>
+</body>
+</html>

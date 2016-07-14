@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>로그인 양식 제어</title>
+<script>
+function loginCheck(){
+	//ID와 PW입력을 제대로 유효하게 작성한 사람에 대해서만 로그인
+	//서버에 정보를 보내기 전에 이 유저가 제대로 입력했는지 여부를 체크해보자=유효성 체크!!
+	if (document.getElementById("member_id").value=="") //id 입력칸이 공백인 경우!!
+	{
+		alert("ID입력해!");
+		document.getElementById("member_id").focus();
+		return; //실행부로하여금 호출부로 되돌아가라!
+	}else if(!document.getElementById("member_pw").value){ // 앞에 !(부정연산자)를 붙임으로써 공백을 표현할수있다.
+		alert("PW입력해!")															//pw입력 칸이 공백인경우!
+		document.getElementById("member_pw").focus();
+		return;
+		}
+	location.href="http://daum.net"
+	alert("정상적으로 로그인했습니다!");
+	
+}
+</script>
+
+</head>
+
+<body>
+	<table border="1px" width="300px" align="center">
+		<tr>
+			<td>ID</td>
+			<td><input type="text" maxlength="8" id="member_id"></td>
+		</tr>
+		<tr>	
+			<td>PW</td>
+			<td><input type="password" maxlength="8" id="member_pw"></td>
+		</tr>
+		<tr>
+			<td colspan="2">  <!-- 2개를 1개로 합침 -->
+			<input type ="button" value="회원가입">
+			<input type ="button" value="ID/PW찾기">
+			<input type ="button" value="로그인" onClick="loginCheck()">
+			</td>
+		<tr>
+	</table>
+
+</body>
+</html>

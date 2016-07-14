@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>부드러운 움직임</title>
+<style>
+#pica{
+	position:absolute;
+	left:0px;
+	top:200px;
+}
+#wrapper{
+	width:100%;
+	height:800px;
+	background:yellow;
+}
+</style>
+<script>
+var pica;
+var targetX;//피카추가 도달할 목표지점!!
+var targetY;
+var a=0.9;
+
+	//목표지점 - 비율계수*(목표지점 - 나의위치);
+
+function move(){
+	//alert(parseInt(pica.style.left));
+	targetX=event.clientX;
+	targetY=event.clientY;
+	pica.style.left=targetX - a*(targetX-parseInt(pica.style.left))+"px";
+	pica.style.top=targetY - a*(targetY-parseInt(pica.style.top))+"px";
+	console.log(pica.style.left);
+
+};
+
+/*function move2(){
+	pica.style.left=parseInt(event.clientX) - a*(parseInt(event.clientX)-parseInt(pica.style.left))+"px";
+	pica.style.top=parseInt(event.clientY) - a*(parseInt(event.clientY)-parseInt(pica.style.top))+"px";
+	setTimeout("move2()",10);
+}*/
+
+
+function init(){
+	pica=document.getElementById("pica")
+	pica.style.left=targetX - a*(targetX-parseInt(pica.style.left))+"px";
+	pica.style.top=targetY - a*(targetY-parseInt(pica.style.top))+"px";
+	setTimeout("init()",10);
+};
+</script>
+</head>
+<body onLoad="init()" onMouseDown="move()">
+<div id="wrapper">
+<img src="../images/캐릭터.png" id="pica"  style="position:absolute;left:0px;top:200px;" width="200px">
+</div>
+</body>
+</html>

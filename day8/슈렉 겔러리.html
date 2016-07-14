@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>슈렉 겔러리</title>
+<style>
+	
+#box{
+	width:3550px;
+	height:340px;
+	position:relative; /*박스를 안고있는 바깥쪽 테두리를 벗어날 수 없음*/
+	
+}
+#mask{
+	margin-top:200px;
+	margin-left:auto;
+	margin-right:auto;
+	width:500px;
+	height:340px;
+	overflow:hidden;
+}
+#wrapper{
+	width:500px;
+	margin-top:200px;
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+	font-size:15pt;
+}
+img{
+	margin:0px;
+}
+body{
+	margin:0px;
+}
+a{
+	text-decoration:none;/*밑줄 없애기*/
+	color:#000000;
+}
+a:hover{	/*마우스 올려놓으면*/
+	color:#bdbdbd;
+}
+</style>
+<script>
+var box;
+var a=0.9;//부드러운 정도(수학에서 비율계수)
+var targetX=0; //box가 도달할 목표지점!!
+
+var arr=[
+	"../images/shurek/img0.jpg",
+	"../images/shurek/img1.jpg",
+	"../images/shurek/img2.jpg",
+	"../images/shurek/img3.jpg",
+	"../images/shurek/img4.jpg",
+	"../images/shurek/img5.jpg",
+	"../images/shurek/img6.jpg"
+	];
+
+
+function init(){
+	box=document.getElementById("box");
+	box.style.width=500*arr.length+"px";
+
+	for(var n=0;n<arr.length;n++)
+	{//이미지 생성
+		var img=document.createElement("img");
+		img.src=arr[n];
+		box.appendChild(img);
+	}
+	//심장박동시작하기
+	move();
+}
+
+function showImg(pos){
+	
+	targetX=-pos*500;
+		//이미지 위치는 (타겟- a*(타겟-나 의 거리));
+
+}
+function move(){
+	
+	box.style.left=targetX-a*(targetX-parseFloat(box.style.left))+"px";
+	setTimeout("move()",10);
+	console.log(box.style.left);
+}
+
+
+</script>
+
+</head>
+<body onLoad="init()">
+	<div id="wrapper">
+		<div id="mask">
+			<div id="box" style="position:relative;left:0px;top:0px" >
+			</div>
+		</div>
+		<a href="javascript:showImg(0)">●</a>
+		<a href="javascript:showImg(1)">●</a>
+		<a href="javascript:showImg(2)">●</a>
+		<a href="javascript:showImg(3)">●</a>
+		<a href="javascript:showImg(4)">●</a>
+		<a href="javascript:showImg(5)">●</a>
+		<a href="javascript:showImg(6)">●</a>
+	</div>
+</body>
+</html>

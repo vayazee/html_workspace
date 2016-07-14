@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>라이트 효과</title>
+<style>
+#zz{
+	width:150px;
+	height:50px;
+	color:white;
+	background:black;
+	border:2px red;
+}
+</style>
+<script>
+//후보색 7개를 배열로 선언하고, 랜덤하게 bg를 결정하세요
+//자동으로 전환되도록 하시오!!
+var ranbg=new Array();
+var n=0;
+
+ranbg[0]="#33ffff";
+ranbg[1]="#006666";
+ranbg[2]="#ff0033";
+ranbg[3]="#ffff33";
+ranbg[4]="#000000";
+ranbg[5]="#ff9900";
+ranbg[6]="#ccccff";
+
+function setBg(){
+	var r=Math.random();
+	var n= parseInt(r*ranbg.length);
+	document.body.style.background=ranbg[n];
+	setTimeout("setBg()",100)
+	console.log(n);
+};
+
+function auto(){
+	//자동 호출 부탁!!
+	//setInterval("setBg()",100);    //1000= 천분의 1
+};
+</script>
+</head>
+<body>
+<input type="button" value="시작" onClick="setBg()" id="zz">
+</body>
+</html>

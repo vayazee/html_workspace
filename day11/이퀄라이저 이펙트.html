@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>이퀄라이져 이펙트</title>
+<style>
+#stage{
+	width:700px;
+	height:500px;
+
+}
+body{
+	margin:0;
+}
+</style>
+<script>
+var bgArray=["red","yellow","orange","green","blue","navy","purple"];
+
+var Rect=function(stage,bg,width,height,x,y){
+	this.stage=stage;
+	this.div;
+	this.bg=bg;
+	this.width=width;
+	this.height=height;
+	this.x=x;
+	this.y=y;
+	this.targetY=0;//사각형이 늘어날 y축 좌표값
+	
+
+	this.init=function(){
+		
+		var me=this;
+		this.div = document.createElement("div");
+		this.div.style.background=this.bg;
+		this.div.style.width=this.width+"px";
+		this.div.style.height=this.height+"px";
+		this.div.style.position="absolute";
+		this.div.style.left=this.x+"px";
+		this.div.style.top=this.y+"px";
+
+		this.stage.appendChild(this.div);
+
+		this.div.addEventListener("mouseover",function(){
+			//alert(me.bg+"에올림?");
+			me.targetY=500;
+		});
+
+		this.move();
+	}
+}
+
+window.addEventListener("load",function(){
+		init();
+});
+
+	function init(){
+		//문서가 로드되면 원하는 갯수의 사각형을 가로 방향으로 나열
+		for(var i=0;i<7;i++){	
+			var rect=new Rect(stage,bgArray[i],100,40,i*100,0);
+			rect.init();
+		}
+	
+	this.move=function(){
+		var me=this;
+		//지정된 targetY만큼 height를 늘이자!!
+		this.div.style.height=parseInt(this.div.style.height)+this.targetY+"px";
+		setTimeout(function(){
+			me.move();	
+		},100);
+	}
+}
+
+
+</script>
+</head>
+<body>
+<div id="stage"></div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>배열을 이용한 겔러리</title>
+<style>
+#outer{
+	width:550px;
+	height:650px;
+	background:#bdbdbd;
+	margin:auto;
+}
+#img_outer{
+	width:100%;
+	height:450px;
+	background:#ffffcc;
+}
+#img_outer img{
+	width:100%;
+	height:450px;
+}
+#bt_controller{
+	text-align:center;
+}
+#bt_prev{
+	transform:rotate(180deg);
+}
+
+</style>
+
+<script>
+var n=0;//이미지 index 넘버
+
+var photo = new Array();
+photo[0]="김태희.jpg"
+photo[1]="박수진.jpg"
+photo[2]="손예진.jpg"
+photo[3]="송혜교.jpg"
+photo[4]="수지.jpg"
+photo[5]="아이유.jpg"
+photo[6]="이영애.jpg"
+photo[7]="전지현.jpg"
+photo[8]="한가인.jpg"
+photo[9]="한예슬.jpg"
+
+function bef(){
+	n--;
+	document.getElementById("girl").src="photo[n]"; //그냥 포토로 해도되네??
+	if(n<0){
+		alert("이전 사진이 없습니다");
+		document.getElementById("girl").src="../images/썸네일 겔러리/"+photo[0]+"";
+	}
+};
+function next(){
+	n++;
+	document.getElementById("girl").src="../images/썸네일 겔러리/"+photo[n]+"";
+	if(n>9){
+		alert("다음 사진이 없습니다");
+		document.getElementById("girl").src="../images/썸네일 겔러리/"+photo[9]+"";
+	}
+};
+</script>
+</head>
+<body>
+
+	<div id="outer">
+		<div id="img_outer"><img src="../images/썸네일 겔러리\김태희.jpg" id="girl"></div>
+		<div id="bt_controller">
+			<img src="../images/bt.png" width=100px; id="bt_prev" onClick="bef()">
+			<img src="../images/bt.png" width=100px; id="bt_next" onClick="next()">
+		</div>
+	</div>
+
+</body>
+</html>

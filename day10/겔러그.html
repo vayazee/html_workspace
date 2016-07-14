@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>겔러그</title>
+<style>
+#stage{
+	width:1000px;
+	height:800px;
+	background-image:url("../images/gallerxy/bg.png");
+}
+body{
+	margin:0;
+}
+</style>
+<script src="../lib/Hero.js"></script>
+<script src="../lib/Enemy.js"></script>
+<script>
+var stage;
+var bgY=0;
+var hero;
+
+//배열을 2개로선언
+var kingArray=new Array();
+var enemyArray=new Array();
+
+var enemyImg=["../images/gallerxy/green_king.png",
+						"../images/gallerxy/blue_king.png",
+						"../images/gallerxy/enermy1.png",
+						"../images/gallerxy/enermy2.png"]
+kingArray=[enemyImg[0],enemyImg[1]];
+enemyArray=[enemyImg[2],enemyImg[3]];
+
+
+window.addEventListener("load",function(){
+	stage=document.getElementById("stage");
+	
+	hero=new Hero(stage,45,45,465,730);
+	bgEffect();
+	
+	//주인공 등장
+	hero.init();
+	
+	//빨간 적군 등장!!
+	var redY=0;
+	var redCount=0;
+	var enemyIndex=0;
+	var k=0;
+	var k2=0;
+
+			for(var i=0;i<90;i++){
+				if(i%15==0){
+					redY++;
+					redCount=0;
+				}
+				if(i%45==0 & i!=0){
+					k++;
+				}
+					var enemy=new Enemy(stage,30,30,100+(redCount*50),50+(redY*50),enemyArray[k]);
+					enemy.init();
+					redCount++;
+			}
+		
+			for(var j=0;j<12;j++){ 
+				
+				if(j%6==0&j!=0){
+				k2++;
+				}
+				var enemy=new Enemy(stage,40,40,100+(j*63),40+(10),kingArray[k2]);
+				enemy.init();
+				
+				kingArray[j]=enemy;
+				console.log("대왕파리 수는"+kingArray.length);
+		}//대왕파리 배열에 담기
+
+
+	
+	
+	
+});
+
+//키보드 입력처리!!
+window.addEventListener("keydown",function(){
+	var key=event.keyCode;//입력한 아스키코드값!!
+	
+	switch(key){
+		case 37:hero.velX=-1;break;//좌측이동
+		case 39:hero.velX=1;break;//우측이동
+		case 32:alert("발사를 원해?");
+				//소괄호에 조건 판단 대상이 되는 데이터!!
+		
+	}
+
+
+});
+
+window.addEventListener("keyup",function(){
+		hero.velX=0;//좌측이동
+});
+
+
+
+//배경이미지 흘러가기 효과
+function bgEffect(){
+	bgY+=1;
+	stage.style.backgroundPosition="0px "+bgY+"px";
+	setTimeout("bgEffect()",5);
+}
+</script>
+</head>
+<body>
+	<div id="stage"></div>
+</body>
+</html>

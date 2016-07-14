@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>우편번호 검색</title>
+<script>
+
+
+function setPost(zip,addr){
+	var a=zip.split("-");
+	opener.document.form1.zipcode1.value=a[0];
+	opener.document.form1.zipcode2.value=a[1];
+	opener.document.form1.addr1.value=addr;
+	window.close();//현재 창 닫기!
+	opener.document.form1.addr2. focus();
+	//새창에서 선택한 현재의 우편번호 텍스트를, 부모윈도우의 우편번호 입력란에 채워넣는다!+주소도 채워넣기
+}
+
+</script>
+</head>
+<body>
+<table width="100%" border="1px">
+	<tr>
+		<td colspan="2" align="center"></td>
+			<input type="text">
+			<img src="/images/search_button.png" width="30px" onClick="">
+		<td></td>
+	</tr>
+	<tr>
+		<td>우편번호</td>
+		<td>주소</td>
+	</tr>
+	<tr onMouseOver="this.style.background='skyblue'" onMouseOut="this.style.background=''">
+		<td><a href="javascript:setPost('123-123','서울 강남구 신사동 도화빌딩')">123-123</a></td>
+		<td>서울 강남구 신사동 도화빌딩</td>
+	</tr>
+	<tr onMouseOver="this.style.background='skyblue'" onMouseOut="this.style.background=''">
+		<td><a href="">234-234</a></td>
+		<td>경기 수원시 영통구</td>
+	</tr>
+	<tr onMouseOver="this.style.background='skyblue'" onMouseOut="this.style.background=''">
+		<td><a href="">345-345</a></td>
+		<td>서울 동작구 흑석동</td>
+	</tr>
+	<tr onMouseOver="this.style.background='skyblue'" onMouseOut="this.style.background=''">
+		<td><a href="">456-456</a></td>
+		<td>부산 해운대구 해운대</td>
+	</tr>
+</table>
+
+</body>
+</html>

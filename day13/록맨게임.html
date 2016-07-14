@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>록맨</title>
+<script src="../lib/Rockman.js"></script>
+<script src="../lib/block.js"></script>
+<script src="../lib/lib.js"></script>
+<script src="../lib/Bullet0.js"></script>
+<script src="../lib/Unit.js"></script>
+
+<script>
+var stage;
+var blockArray=new Array();
+var rockman;
+var step=0;
+var actionCount=0;//몇번째 액션을 보여줄지를 결정하는 변수.
+var speedCount=0;//키보드 인식이 너무 빠르면 안되므로, actionCount에 증가시점을 늦출 변수!!
+var enemyArray=new Array();
+var actionArray=[
+	"../images/rockman2.png",
+	"../images/rockman3.png",
+	"../images/rockman4.png"
+]
+
+window.addEventListener("load",function(){
+	init();
+});
+
+function init(){
+	//무대 크기
+	stage=document.getElementById("stage");
+	stage.style.width=screen.width+"px";
+	stage.style.height=800+"px";
+	stage.style.backgroundImage="url('../images/배경 이미지.png')";
+	//stage.style.background="yellow";
+	document.body.style.margin="0px";
+
+	bgEffect();
+	createEnemy();
+	//주인공 등장하기
+	rockman=new Rockman(stage,55,55,50,0,"../images/rockman5.png");
+
+	rockman.init();
+	for(var i=0;i<14;i++){
+		var block=new Block(stage,40,40,40*i,600,"../images/block1.png");
+		block.init();
+		blockArray.push(block);
+	}
+
+
+	stage.addEventListener("click",function(){
+		posX=event.clientX;
+		posY=event.clientY;
+		var block=new Block(stage,40,40,posX,posY,"../images/block1.png");
+		block.init();
+		blockArray.push(block);
+});
+}
+
+function gameStart(){
+//록맨 등장
+rockman=new Rockman(stage,60,60,50,0,"../images/rockman5.png");
+
+	rockman.init();
+}
+
+function createEnemy(){
+	var enemyImg=[
+		"../images/enemy/e1.png",
+		"../images/enemy/e2.png",
+		"../images/enemy/e3.png",
+		"../images/enemy/e4.png"];
+	for (i=0;i<8 ;i++ ){
+	var r=getRandomByRange(3,0);
+
+	var enemy=new Unit(stage,75,75,screen.width-75,i*80,enemyImg[r]);
+	enemy.init();
+
+	//배열에 적군 추가하기!!
+	
+	enemyArray.push(enemy);
+	}
+}
+
+//키보드 4개에 대한 처리
+window.addEventListener("keydown",function(){
+	var key=event.keyCode;
+	switch(key){
+		case 32:jump();break; //space bar
+		case 37:go(-2);break;
+		case 39:go(2);break;
+		case 65:fire();break;
+	}
+	
+});
+
+window.addEventListener("keyup",function(){
+	var key=event.keyCode;
+	
+	if(key==37 || key==39||key==32){
+		rockman.velX=0;
+		step=0;
+		rockman.jump("../images/rockman5.png",50,50);
+	}
+});
+
+
+function jump(){
+	if(!rockman.jumping&&!rockman.falling){
+	rockman.velY=-7;
+	}
+	//점프상태도 아니고, 떨어지고 있지도 않은 상황에서만 점프를 허용한다.
+	rockman.jumping=true;
+	
+
+	rockman.jump("../images/rockman1.png",75,75);
+	
+}
+
+function fire(){
+	var bullet=new Bullet(stage,rockman.x+10,rockman.y+10);
+	bullet.init();
+
+	
+}
+
+
+function go(s){
+	
+	step=s;
+	// 움직임 처리
+	rockman.velX=step;
+	//카메라효과
+	
+	speedCount++;
+		if(speedCount>5){
+			actionCount++;
+			speedCount=0;
+			
+		}
+		if(actionCount>actionArray.length-1){
+			actionCount=0;
+			}
+		
+		rockman.action(actionArray[actionCount],55,55);
+
+		console.log(speedCount);
+		console.log(actionCount);
+	//액션처리
+	
+}
+//배경처리
+var bgX=0;
+function bgEffect(){
+
+	bgX-=(step*1);
+	stage.style.backgroundPosition=bgX+"px 0px";
+	setTimeout("bgEffect()",10);
+}
+</script>
+</head>
+<body>
+<div id="stage"></div>
+</body>
+</html>

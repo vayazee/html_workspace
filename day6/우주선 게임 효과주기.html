@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>우주선 게임 효과주기</title>
+
+<style>
+body{
+	margin:0px; /*body태그는 기본적으로 내용물과 조금 마진을 두므로
+							그 값을 없애보자!*/
+}
+
+#bg{
+	width:100%;
+	height:900px;
+	background:url("../images/배경 이미지.png");
+	background-repeat: repeat-x;
+}
+
+#pic{
+	position:absolute;
+	left:0px;
+	top:300px;
+}
+
+/*총알을 화면에서 안보이게 하려면 left값을 음수화 시키자!!*/
+#bullet{
+	position:absolute;
+	left:-120px;
+}
+
+</style>
+
+<script>
+var x=0; //background를 제어할 변수
+var r=0; //비행기를 좌우로 제어할 변수
+var h=300;
+var b=-120; //총알의  x축 값을 변경하기 위한 변수
+
+function joyStick(){
+	//키보드 입력을 인식하여, 특히 방향키 4개에 대해서만 반응을 보이자!!
+	//우리가 키를 입력해도 컴퓨터는 이해못함.. 우리가 입력한 키를 10진수로 표현한
+	//코드 체계가 중간에 관여한다. 이 코드체계를 ASCII 코드라 한다.
+var key = event.keyCode; //우리가 누른 키보드값에 대응하는 아스키코드값 반환!!
+	
+var pic = document.getElementById("pic");
+	if(key==37){
+		r-=8;
+	//좌측이동	left값 음수로 누적
+	}
+	else if(key==38){
+		h-=8;
+	//상향이동 top 값 음수로 누적
+	}
+	else if(key==39){ 
+		r+=8;
+	//우측이동 left값 양수로 누적
+	}
+	else if(key==40){
+		h+=8;
+	//하향이동 top 값 양수로 누적
+	}
+	if (key==32){
+		fire();
+	}
+	pic.style.left=r+"px";
+	pic.style.top=h+"px";
+	document.getElementById("bullet").style.top=h+"px";
+	document.getElementById("bullet").style.left=r+"px";
+
+
+	//space bar 를 누르면 총알발사, 총알의 left값을 증가시키자!!	
+};
+
+function fire(){
+		b+=10;
+				document.getElementById("bullet").style.left=b+"px";
+		setTimeout("fire()",10);
+
+if(b>1500){
+			document.getElementById("bullet").style.left="-120px";
+};
+
+
+
+
+		}
+
+		//총알이 날아가는 효과를 주기위한 함수
+
+
+function init(){
+	x-=1; //-1씩
+	document.getElementById("bg").style.backgroundPosition=x+"px 0px";
+	setTimeout("init()",1);
+	//문서가 로드되면, 배경을 x축 방향으로 감소시키자!!
+}
+</script>
+
+</head>
+<body onLoad="init()" onKeyDown="joyStick()">
+	<div id="bg">
+		<img src="../images/비행기.gif" width="150px" id="pic">
+		<img src="../images/bullet.png" width="60px" id="bullet">
+	</div>
+</body>
+</html>

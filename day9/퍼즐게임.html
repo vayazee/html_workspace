@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+<script src="../lib/Puzzle.js"></script>
+<script>
+var stage;
+var r=0;
+
+window.addEventListener("load",function(){
+	stage=document.createElement("div");
+	stage.style.width=800+"px";
+	stage.style.height=800+"px";
+	//stage.style.background="yellow";	
+	stage.style.margin="auto";
+	//연애인사진 배경으로 지정하기
+	stage.style.backgroundImage="url('../images/photo.jpg')";
+	document.body.appendChild(stage);
+
+	createBox();
+});	
+var bg=["red","orange","yellow","green","blue","navy","purple"]
+	
+
+function createBox(){
+	for(var i=0;i<64;i++){
+	var r= parseInt(Math.random()*bg.length);
+	var p =new Puzzle(stage,100,100,bg[r]);
+	p.init();
+	}
+}
+	
+</script>
+</head>
+<body>
+	
+</body>
+</html>
